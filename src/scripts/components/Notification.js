@@ -5,12 +5,13 @@ import Notifications from 'react-notification-system-redux'
 import Colors from 'components/foundations/base/Colors'
 
 type Props = {
-  notifications: Array<Object>
+  notifications: Array<Object>,
+  animateKeys: Array<string>
 }
 
 class Notification extends Component<Props, Array<Object>> {
   render () {
-    const { notifications } = this.props
+    const { notifications, animateKeys } = this.props
 
     // here the reference for Style the component
     // https://github.com/igorprado/react-notification-system/blob/master/src/styles.js
