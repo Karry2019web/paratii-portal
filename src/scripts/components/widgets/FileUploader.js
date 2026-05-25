@@ -119,6 +119,19 @@ class FilesUploader extends Component<Props, Object> {
     if (this.props.isWalletSecured) {
       const file = e.target.files[0]
       if (file) {
+        const validTypes = ['video/mp4']
+        const MAX_FILE_SIZE = 2 * 1024 * 1024 * 1024
+
+        if (!validTypes.includes(file.type) && !file.name.endsWith('.mp4')) {
+          this.props.history.push(FILESUPLOADER_PATH_TO)
+          return
+        }
+
+        if (file.size > MAX_FILE_SIZE) {
+          this.props.history.push(FILESUPLOADER_PATH_TO)
+          return
+        }
+
         this.props.onFileChosen(file)
         this.setState({
           file: file,
@@ -188,6 +201,8 @@ class FilesUploader extends Component<Props, Object> {
           <Span tiny>
             <br />
             <TranslatedText message="uploader.supportedFileTypes" />
+            <br />
+            <Span tiny>Files must be &lt;2GB</Span>
           </Span>
         </UploadCoverText>
       </UploaderWrapper>
